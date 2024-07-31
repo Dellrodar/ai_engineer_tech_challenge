@@ -23,6 +23,5 @@ if user_input:
   st.session_state.chat_history.append(HumanMessage(content=user_input))
 
   with st.spinner('Generating response...'):
-    response = get_response(user_input, st.session_state.chat_history)
-    st.write_stream(response)
+    response = st.write_stream(get_response(user_input, st.session_state.chat_history))
   st.session_state.chat_history.append(AIMessage(content=response))
