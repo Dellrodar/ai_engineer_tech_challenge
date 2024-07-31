@@ -64,16 +64,19 @@ def get_videos_and_urls(user_query, limit):
   ]
 
 def get_response(user_query, chat_history):
+  base_url = st.secrets["BASE_URL"]
+  port = st.secrets["OLLAMA_PORT"]
+  full_url = base_url + ':' + port
   llm = ChatOllama(
     model = 'llama3.1',
     temperature=0.2,
-    # base_url='http://host.docker.internal:11434'
-    base_url='http://localhost:11434'
+    base_url=full_url
   )
 
   # Making a template for opening the page
   template = """
     Chat history: {chat_history}
+
     User question: {user_question}
     """
 
