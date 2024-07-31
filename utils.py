@@ -1,6 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_ollama import ChatOllama
+from langchain_community.llms import Ollama
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
 import requests
@@ -63,9 +63,10 @@ def get_videos_and_urls(user_query, limit):
   ]
 
 def get_response(user_query, chat_history):
-  llm = ChatOllama(
+  llm = Ollama(
     model = 'llama3.1',
     temperature=0.2,
+    base_url='http://ollama-container:11434'
   )
 
   # Making a template for opening the page
