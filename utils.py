@@ -8,6 +8,7 @@ import streamlit as st
 import numpy as np
 
 def init(title):
+  st.logo('https://skywarditsolutions.com/skyward/wp-content/themes/skyward/assets/img/skyward-logo.svg', link='https://skywarditsolutions.com/')
   st.set_page_config(
     page_title=title,
   )

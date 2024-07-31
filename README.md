@@ -1,3 +1,6 @@
+# My App
+My app is deployed via https://dellrodar-ai-engineer-tech-challenge-home-tvqd07.streamlit.app/
+
 # Skyward tech challenge for AI engineer position
 
 This repository is meant to be used as a challenge for AI engineer candidates at Skyward.
