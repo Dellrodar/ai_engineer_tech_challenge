@@ -66,7 +66,7 @@ def get_response(user_query, chat_history):
   llm = Ollama(
     model = 'llama3.1',
     temperature=0.2,
-    base_url='http://localhost:11434'
+    # base_url='http://localhost:11434'
   )
 
   # Making a template for opening the page
