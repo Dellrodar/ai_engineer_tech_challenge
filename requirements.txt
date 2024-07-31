@@ -3,5 +3,6 @@ langchain_community
 langchain_ollama
 bs4
 streamlit
+streamlit_chat
 numpy
 requests

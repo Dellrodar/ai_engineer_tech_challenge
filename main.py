@@ -28,7 +28,10 @@ def init():
     st.link_button(label='Home', url='http://localhost:8501/', use_container_width=True)
 
 def get_response(user_query, chat_history):
-  llm = ChatOllama(model = 'llama3.1')
+  llm = ChatOllama(
+    model = 'llama3.1',
+    temperature=0.2,
+  )
 
   # Making a template for opening the page
   template = """
