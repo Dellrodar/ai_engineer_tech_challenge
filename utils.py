@@ -86,9 +86,10 @@ def get_response(user_query, chat_history, limit):
     st.text('Here are some helpful links:')
     for url in urls:
       st.link_button(label=url, url=url, use_container_width=True)
-  with st.container(height=300, border=True):
-    for video in videos:
-      st.video(video)
+  if videos:
+    with st.container(height=300, border=True):
+      for video in videos:
+        st.video(video)
 
   return chain.stream({
         'chat_history': chat_history,
