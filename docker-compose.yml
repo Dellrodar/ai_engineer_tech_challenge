@@ -1,0 +1,21 @@
+services:
+  ollama-container:
+    image: ollama/ollama
+    networks:
+      - skyward_it_test
+    volumes:
+      - ./data/ollama:/root/.ollama
+    ports:
+      - 11434:11434
+
+  skyward-chat-bot:
+    image: skyward_it_test
+    ports:
+      - 8501:8501
+    networks:
+      - skyward_it_test
+    depends_on:
+      - ollama-container
+
+networks:
+  skyward_it_test:
