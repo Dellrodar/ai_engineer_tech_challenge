@@ -62,7 +62,7 @@ def get_videos_and_urls(user_query, limit):
     videos,
   ]
 
-def get_response(user_query, chat_history, limit):
+def get_response(user_query, chat_history):
   llm = ChatOllama(
     model = 'llama3.1',
     temperature=0.2,
@@ -80,7 +80,7 @@ def get_response(user_query, chat_history, limit):
   # Making the chain to stream from to output to the page
   chain = prompt | llm |  StrOutputParser()
 
-  urls, videos = get_videos_and_urls(user_query, limit)
+  urls, videos = get_videos_and_urls(user_query, 4)
 
   with st.container(height=300, border=True):
     st.text('Here are some helpful links:')

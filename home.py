@@ -8,11 +8,6 @@ init('Skyward Chat Bot')
 if "chat_history" not in st.session_state:
   st.session_state.chat_history = [AIMessage(content='Hello! Welcome to the chat! Do you have a question?')]
 
-if 'messages' not in st.session_state:
-  st.session_state.messages = [
-    SystemMessage(content='You are a helpful assistant'),
-  ]
-
 st.header('My Perplexity-like clone')
 
 messages = st.session_state.get('chat_history', [])
@@ -28,5 +23,6 @@ if user_input:
   st.session_state.chat_history.append(HumanMessage(content=user_input))
 
   with st.spinner('Generating response...'):
-    response = st.write_stream(get_response(user_input, st.session_state.chat_history, 4))
+    response = get_response(user_input, st.session_state.chat_history)
+    st.write_stream(response)
   st.session_state.chat_history.append(AIMessage(content=response))
