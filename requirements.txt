@@ -1,0 +1,7 @@
+langchain
+langchain_community
+langchain_ollama
+bs4
+streamlit
+numpy
+requests
