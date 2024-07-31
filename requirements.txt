@@ -1,5 +1,6 @@
 langchain
 langchain_community
+langchain_ollama
 bs4
 streamlit
 streamlit_chat
