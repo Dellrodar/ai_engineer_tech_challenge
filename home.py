@@ -1,4 +1,4 @@
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+from langchain_core.messages import AIMessage, HumanMessage
 from streamlit_chat import message
 import streamlit as st
 from utils import init, get_response
@@ -12,7 +12,7 @@ st.header('My Perplexity-like clone')
 
 messages = st.session_state.get('chat_history', [])
 for i, msg in enumerate(messages):
-  if i % 2 == 0:
+  if i % 2 != 0:
     message(msg.content, is_user=True, key=str(i) + '_user')
   else:
     message(msg.content, is_user=False, key=str(i) + '_ai')

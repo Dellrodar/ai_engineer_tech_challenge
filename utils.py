@@ -71,9 +71,10 @@ def get_response(user_query, chat_history):
 
   # Making a template for opening the page
   template = """
+    You are a helpful assistant.
+    Answer the following questions considering the history of the conversation:
     Chat history: {chat_history}
-
-    User question: {user_question}
+    User question: {user_query}
     """
 
   # Creating the user input prompt
@@ -89,11 +90,11 @@ def get_response(user_query, chat_history):
     for url in urls:
       st.link_button(label=url, url=url, use_container_width=True)
   if videos:
-    with st.container(height=300, border=True):
+    with st.container(height=400, border=True):
       for video in videos:
         st.video(video)
 
   return chain.stream({
         'chat_history': chat_history,
-        'user_question': user_query
+        'user_query': user_query
       })
