@@ -9,7 +9,7 @@ services:
       - 11434:11434
 
   skyward-chat-bot:
-    image: skyward_it_test
+    image: skyward-test
     ports:
       - 8501:8501
     networks:
