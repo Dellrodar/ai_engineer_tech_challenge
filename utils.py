@@ -6,6 +6,15 @@ from urllib.parse import unquote
 import requests
 import streamlit as st
 import numpy as np
+import os
+
+# getting environment variables for LLM
+ollama_url = os.environ.get('OLLAMA_URL', 'http://ollama-container')
+port = os.environ.get('OLLAMA_PORT', 11434)
+model = os.environ.get('MODEL', 'llama3.1')
+temp = os.environ.get('TEMPERATURE', 0.2)
+search_url = os.environ.get('SEARCH_URL', 'http://www.google.com')
+link_and_video_search_limit = os.environ.get('VIDEO_URL_RESULT_LIMIT', 4)
 
 def init(title):
   st.logo('https://skywarditsolutions.com/skyward/wp-content/themes/skyward/assets/img/skyward-logo.svg', link='https://skywarditsolutions.com/')
@@ -13,11 +22,14 @@ def init(title):
     page_title=title,
   )
 
-  st.sidebar.page_link("http://www.google.com", label="Google", icon="🌎")
+  st.sidebar.page_link(search_url, label="Search", icon="🌎")
 
 def get_videos_and_urls(user_query, limit):
-  response = requests.get(f'https://google.com/search?q={user_query}')
+  # Querying a search engine for results
+  response = requests.get(f'{search_url}/search?q={user_query}')
+  # parsing html from response
   soup = BeautifulSoup(response.text, 'html.parser')
+  # finding all links from the parsed html
   links = soup.find_all('a')
 
   urls = []
@@ -64,9 +76,9 @@ def get_videos_and_urls(user_query, limit):
 
 def get_response(user_query, chat_history):
   llm = Ollama(
-    model='llama3.1',
-    temperature=0.2,
-    base_url='http://ollama-container:11434'
+    model=model,
+    temperature=temp,
+    base_url='{ollama_url}:{port}'
   )
 
   # Making a template for opening the page
@@ -83,7 +95,7 @@ def get_response(user_query, chat_history):
   # Making the chain to stream from to output to the page
   chain = prompt | llm |  StrOutputParser()
 
-  urls, videos = get_videos_and_urls(user_query, 4)
+  urls, videos = get_videos_and_urls(user_query, link_and_video_search_limit)
 
   with st.container(height=300, border=True):
     st.text('Here are some helpful links:')

@@ -1,9 +1,11 @@
 import streamlit as st
 from utils import init, get_videos_and_urls
+import os
 
 init('Discovery Page')
 main = st.container()
-urls, videos = get_videos_and_urls('Todays top stories', 10)
+discovery_result_limit = os.environ.get('DISCOVERY_RESULT_LIMIT', 10)
+urls, videos = get_videos_and_urls('Todays top stories', discovery_result_limit)
 with main:
   top = st.container(height=800)
   with top:
